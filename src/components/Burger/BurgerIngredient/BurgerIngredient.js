@@ -10,6 +10,8 @@ import {
   Salad,
   Bacon } from './BurgerIngredient.css';
 
+const BREAD_TOP = 'bread-top';
+
 const ingredientMap = {
   'bread-bottom': BreadBottom,
   'bread-top': BreadTop,
@@ -20,18 +22,19 @@ const ingredientMap = {
 }
 
 const burgerIngredient = (props) => {
-  console.log('props ', props)
   return (
     <Aux>
-      {
-        props.type === 'bread-top' ?
-          <div className={ingredientMap[props.type]}>
-            <div className={Seeds1}></div>
-            <div className={Seeds2}></div>
-          </div>
-        :
-          <div className={ingredientMap[props.type]}></div>
+      <div className={ingredientMap[props.type]}>
+        {
+          props.type === BREAD_TOP ?
+            <Aux>
+              <div className={Seeds1}></div>
+              <div className={Seeds2}></div>
+            </Aux>
+          : null
       }
+      </div>
+
     </Aux>
   )
 }
