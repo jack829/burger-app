@@ -1,6 +1,6 @@
 import React from 'react';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
-import classes from './Burger.css';
+import styles from './Burger.css';
 
 const START_ADDING = <p>Please start adding ingredients to see a preview of your burger</p>
 
@@ -16,7 +16,7 @@ const burger = (props) => {
     }, [])
 
   return (
-    <div className={classes.Burger}>
+    <div className={styles.Burger}>
       <BurgerIngredient type="bread-top" />
       {allIngredients.length ? allIngredients : START_ADDING}
       <BurgerIngredient type="bread-bottom" />
