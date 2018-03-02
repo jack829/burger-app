@@ -1,6 +1,7 @@
 import React from 'react';
 import Aux from '../../../hoc/Aux';
 import { TYPE_MAP, PRICE_MAP } from '../../../constants';
+import Price from '../../Common/Price/Price';
 
 const orderSummary = (props) => {
   return (
@@ -16,7 +17,7 @@ const orderSummary = (props) => {
           )
         })}
       </ul>
-      <h3>Total Price: {`$${props.totalPrice}`}</h3>
+      <Price price={props.totalPrice} />
     </Aux>
   );
 };
