@@ -50,7 +50,8 @@ class BurgerBuilder extends Component {
   }
 
   canOrder(updatedIngredients) {
-    return Object.values(updatedIngredients).reduce((sum, item) => sum + item, 0);
+    // Object.values not supported in IE
+    return Object.keys(updatedIngredients).reduce((sum, key) => sum + updatedIngredients[key], 0);
   }
 
   getDisabledInfo() {
