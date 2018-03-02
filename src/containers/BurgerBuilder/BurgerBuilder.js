@@ -18,12 +18,14 @@ class BurgerBuilder extends Component {
       bacon: 0,
       meat: 0
     },
-    totalPrice: 4
+    totalPrice: 4,
+    canOrder: false
   }
 
   handleAddRemove(addRemove, type) {
     let updatedPrice = this.state.totalPrice;
     let updatedCount = this.state.ingredients[type];
+
     switch (addRemove) {
       case 'add':
         updatedCount += 1;
@@ -38,14 +40,17 @@ class BurgerBuilder extends Component {
         updatedPrice += 0;
     }
 
-    if (updatedCount < 0) return;
-
     const updatedIngredients = { ...this.state.ingredients, [type]: updatedCount };
 
     this.setState({
       ingredients: updatedIngredients,
-      totalPrice: updatedPrice
+      totalPrice: updatedPrice,
+      canOrder: this.canOrder({...updatedIngredients})
     })
+  }
+
+  canOrder(updatedIngredients) {
+    return Object.values(updatedIngredients).reduce((sum, item) => sum + item, 0);
   }
 
   getDisabledInfo() {
@@ -63,7 +68,8 @@ class BurgerBuilder extends Component {
         <BuildControls
           addRemove={this.handleAddRemove.bind(this)}
           disabled={this.getDisabledInfo()}
-          totalPrice={this.state.totalPrice} />
+          totalPrice={this.state.totalPrice}
+          canOrder={this.state.canOrder} />
       </Aux>
     )
   }
