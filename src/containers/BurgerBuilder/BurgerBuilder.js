@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Aux from '../../hoc/Aux';
-import { PRICE_MAP } from '../../constants';
+import { PRICE_MAP, MAX_ING, MIN_ING, BASE_PRICE } from '../../constants';
 import Modal from '../../ui/Modal/Modal';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
@@ -15,7 +15,7 @@ class BurgerBuilder extends Component {
       bacon: 0,
       meat: 0
     },
-    totalPrice: 4,
+    totalPrice: BASE_PRICE,
     canOrder: false,
     ordering: false
   }
@@ -61,10 +61,14 @@ class BurgerBuilder extends Component {
   }
 
   getDisabledInfo() {
-    const disabledInfo = { ...this.state.ingredients }
-    for (let key in disabledInfo) {
-      disabledInfo[key] = disabledInfo[key] <= 0;
-    }
+    const ingCopy = { ...this.state.ingredients };
+    const disabledInfo = {};
+    Object.keys(ingCopy).forEach((key) => {
+      disabledInfo[key] = {
+        remove: ingCopy[key] <= MIN_ING,
+        add: ingCopy[key] >= MAX_ING
+      }
+    })
     return disabledInfo;
   }
 
