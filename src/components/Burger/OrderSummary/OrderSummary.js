@@ -2,6 +2,7 @@ import React from 'react';
 import Aux from '../../../hoc/Aux';
 import { TYPE_MAP, PRICE_MAP } from '../../../constants';
 import Price from '../../Common/Price/Price';
+import Button from '../../../ui/Button/Button';
 
 const orderSummary = (props) => {
   return (
@@ -18,6 +19,8 @@ const orderSummary = (props) => {
         })}
       </ul>
       <Price price={props.totalPrice} />
+      <Button type="Danger" clicked={props.clickCancel}>cancel</Button>
+      <Button type="Success" clicked={props.clickContinue}>Continue</Button>
     </Aux>
   );
 };

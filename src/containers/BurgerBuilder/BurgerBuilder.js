@@ -51,9 +51,11 @@ class BurgerBuilder extends Component {
     this.setState({ ordering: true });
   }
 
-  onCloseModal() {
+  onCloseOrderModal() {
     this.setState({ ordering: false });
   }
+
+  onClickConfirmOrder() {}
 
   canOrder(updatedIngredients) {
     // Object.values not supported in IE
@@ -75,10 +77,12 @@ class BurgerBuilder extends Component {
   render() {
     return (
       <Aux>
-        <Modal show={this.state.ordering} closeModal={this.onCloseModal.bind(this)} >
+        <Modal show={this.state.ordering} closeModal={this.onCloseOrderModal.bind(this)} >
           <OrderSummary
             ingredients={this.state.ingredients}
-            totalPrice={this.state.totalPrice} />
+            totalPrice={this.state.totalPrice}
+            clickCancel={this.onCloseOrderModal.bind(this)}
+            clickContinue={this.onClickConfirmOrder.bind(this)} />
         </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildControls
