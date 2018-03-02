@@ -2,7 +2,7 @@ import React from 'react';
 import Aux from '../../../hoc/Aux';
 import { TYPE_MAP, PRICE_MAP } from '../../../constants';
 import Price from '../../Common/Price/Price';
-import Button from '../../../ui/Button/Button';
+import Button from '../../UI/Button/Button';
 
 const orderSummary = (props) => {
   return (
