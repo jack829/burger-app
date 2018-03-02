@@ -8,7 +8,7 @@ import {
 const buildControl = (props) => (
   <div className={BuildControl}>
     <div className={Label}>{props.label}</div>
-    <button className={Less} onClick={props.remove}>Remove</button>
+    <button className={Less} onClick={props.remove} disabled={props.disabled}>Remove</button>
     <button className={More} onClick={props.add}>Add</button>
   </div>
 );
