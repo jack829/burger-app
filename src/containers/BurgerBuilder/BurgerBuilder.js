@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import Aux from '../../hoc/Aux';
+import { PRICE_MAP } from '../../constants';
+import Modal from '../../ui/Modal/Modal';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
-const PRICE_MAP = {
-  salad: 0,
-  meat: 1.5,
-  cheese: 0.75,
-  bacon: 1
-}
 
 class BurgerBuilder extends Component {
   state = {
@@ -19,10 +16,11 @@ class BurgerBuilder extends Component {
       meat: 0
     },
     totalPrice: 4,
-    canOrder: false
+    canOrder: false,
+    ordering: false
   }
 
-  handleAddRemove(addRemove, type) {
+  onClickAddRemove(addRemove, type) {
     let updatedPrice = this.state.totalPrice;
     let updatedCount = this.state.ingredients[type];
 
@@ -45,8 +43,16 @@ class BurgerBuilder extends Component {
     this.setState({
       ingredients: updatedIngredients,
       totalPrice: updatedPrice,
-      canOrder: this.canOrder({...updatedIngredients})
+      canOrder: this.canOrder({ ...updatedIngredients })
     })
+  }
+
+  onClickPurchase() {
+    this.setState({ ordering: true });
+  }
+
+  onCloseModal() {
+    this.setState({ ordering: false });
   }
 
   canOrder(updatedIngredients) {
@@ -65,12 +71,18 @@ class BurgerBuilder extends Component {
   render() {
     return (
       <Aux>
+        <Modal show={this.state.ordering} closeModal={this.onCloseModal.bind(this)} >
+          <OrderSummary
+            ingredients={this.state.ingredients}
+            totalPrice={this.state.totalPrice} />
+        </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildControls
-          addRemove={this.handleAddRemove.bind(this)}
+          addRemove={this.onClickAddRemove.bind(this)}
           disabled={this.getDisabledInfo()}
           totalPrice={this.state.totalPrice}
-          canOrder={this.state.canOrder} />
+          canOrder={this.state.canOrder}
+          order={this.onClickPurchase.bind(this)} />
       </Aux>
     )
   }

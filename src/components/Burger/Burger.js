@@ -10,10 +10,9 @@ const burger = (props) => {
     return [...Array(props.ingredients[ingredient])].map((_, i) => {
       return <BurgerIngredient key={ingredient + i} type={ingredient} />
     });
-  })
-    .reduce((base, current) => {
-      return base.concat(current);
-    }, [])
+  }).reduce((base, current) => {
+    return base.concat(current);
+  }, [])
 
   return (
     <div className={styles.Burger}>
